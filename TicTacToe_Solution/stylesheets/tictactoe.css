@@ -1,0 +1,58 @@
+
+body {
+  background-color: #0f0f1e;
+  background-image: url('../images/background.jpg');    
+  font-size: 22px;
+  display: -webkit-flex;
+  -webkit-flex-flow: row;
+  -webkit-justify-content: center;
+}
+
+.main {
+	
+}
+
+.game-state {
+  text-align: center;
+  font-family: 'Skranji', cursive;
+  color:#bbb;
+  text-shadow: 0.1em 0.1em 0.05em #333;
+  font-size: 3em;
+  margin: 0;
+}
+
+.board {
+  background-image: url('../images/grid.png');
+  background-size: 100% 100%;
+  max-width: 700px;
+  margin: 0 10%;
+}
+
+.row {
+ 	display: -webkit-flex;
+	-webkit-flex-flow: row;
+}
+
+.square {
+    padding: 2%;
+}
+
+.button-wrapper {
+  height: 50px;
+  display: -webkit-flex;
+  -webkit-justify-content: flex-end;
+  -webkit-align-items: flex-end;
+}
+
+.new-game {
+  color: #444;
+  font-size: 1em;
+  margin-right: 10%;
+  border: 2px solid #333;
+  border-radius: 10px;
+}
+
+img {
+  width:  256px;
+  height: auto;
+}

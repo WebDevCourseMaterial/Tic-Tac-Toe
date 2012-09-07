@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/tictactoe.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/common.css">
+    <link href='http://fonts.googleapis.com/css?family=Skranji' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <script type="text/javascript" src="../../../closure/closure-library/closure/goog/base.js"></script>
+    <script type="text/javascript">
+      goog.require('goog.events');
+      goog.require('goog.events.EventTarget');
+      goog.require('goog.debug.Logger');
+    </script>    
+    <script type="text/javascript" src="js/tictactoe_game.js"></script>
+    <script type="text/javascript" src="js/tictactoe_controller.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    
+    <!-- TODO: In later projects use a deps file + goog.require statements. -->
+    <!--
+    <script type="text/javascript" src="build/deps.js"></script>
+    <script type="text/javascript">
+      goog.require('tictactoe.Main');
+    </script>
+     -->
+  </head>
+  <body>
+    <div class="main">
+      <h1 class="game-state">X's Turn</h1>
+	  <div class="board">
+	    <div class="row">
+	      <img class="square" src="images/mark_o.png">
+	      <img class="square" src="">
+	      <img class="square" src="images/mark_x.png">
+	    </div>
+	    <div class="row">
+	      <img class="square" src="images/mark_x.png">
+	      <img class="square" src="images/mark_o.png">
+	      <img class="square" src="">
+	    </div>
+	    <div class="row">
+	      <img class="square" src="">
+	      <img class="square" src="images/mark_x_hover.png">
+	      <img class="square" src="images/mark_o.png">
+	    </div>
+	  </div>
+      <div class="button-wrapper">
+        <button class="new-game">New game</button>
+      </div>
+    </div>
+  </body>
+</html>
