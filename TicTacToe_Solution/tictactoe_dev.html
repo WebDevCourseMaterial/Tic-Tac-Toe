@@ -14,7 +14,8 @@
       goog.require('goog.events.EventTarget');
       goog.require('goog.debug.Logger');
     </script>    
-    <script type="text/javascript" src="js/tictactoe_game.js"></script>
+    <script type="text/javascript" src="js/game_interface.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
     <script type="text/javascript" src="js/tictactoe_controller.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     
@@ -29,24 +30,24 @@
   <body>
     <div class="main">
       <h1 class="game-state">X's Turn</h1>
-	  <div class="board">
-	    <div class="row">
-	      <img class="square" src="images/mark_o.png">
-	      <img class="square" src="">
-	      <img class="square" src="images/mark_x.png">
+	    <div class="board xturn">
+	      <div class="row">
+	        <img class="square" src="images/empty.png" alt="Board cell">
+	        <img class="square" src="images/empty.png" alt="Board cell">
+	        <img class="square" src="images/empty.png" alt="Board cell">
+	      </div>
+	      <div class="row">
+	        <img class="square" src="images/empty.png" alt="Board cell">
+	        <img class="square" src="images/empty.png" alt="Board cell">
+	        <img class="square" src="images/empty.png" alt="Board cell">
+	      </div>
+	      <div class="row">
+	        <img class="square" src="images/empty.png" alt="Board cell">
+	        <img class="square" src="images/empty.png" alt="Board cell">
+	        <img class="square" src="images/empty.png" alt="Board cell">
+	      </div>
 	    </div>
-	    <div class="row">
-	      <img class="square" src="images/mark_x.png">
-	      <img class="square" src="images/mark_o.png">
-	      <img class="square" src="">
-	    </div>
-	    <div class="row">
-	      <img class="square" src="">
-	      <img class="square" src="images/mark_x_hover.png">
-	      <img class="square" src="images/mark_o.png">
-	    </div>
-	  </div>
-      <div class="button-wrapper">
+      <div class="new-game-wrapper">
         <button class="new-game">New game</button>
       </div>
     </div>
