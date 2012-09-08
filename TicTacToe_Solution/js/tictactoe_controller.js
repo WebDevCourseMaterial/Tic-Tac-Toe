@@ -14,6 +14,7 @@ goog.require('goog.events');
 goog.require('goog.events.EventTarget');
 goog.require('goog.events.EventHandler');
 goog.require('goog.ui.Control');
+goog.require('ttt.Game');
 
 
 /**
@@ -22,7 +23,7 @@ goog.require('goog.ui.Control');
  * @constructor
  * @extends {goog.events.EventTarget}
  */
-ttt.TicTacToeController = function(contentElement) {
+ttt.TicTacToeController = function() {
   goog.base(this);
 
   /**
@@ -92,7 +93,7 @@ ttt.TicTacToeController.prototype.init_ = function() {
   var boardSquareEls = goog.dom.getElementsByClass(
       goog.getCssName('square'));
   goog.array.forEach(boardSquareEls, goog.bind(function(boardSquareEl) {
-    var squareControl = new goog.ui.Control();
+    var squareControl = new goog.ui.Control('');
     squareControl.decorate(boardSquareEl);
     this.eventHandler_.listen(squareControl, goog.ui.Component.EventType.ACTION,
         this.handleSquarePress_);
@@ -101,7 +102,7 @@ ttt.TicTacToeController.prototype.init_ = function() {
 
   // Add a listener to the new game button.
   var newGameEl = goog.dom.getElementByClass(goog.getCssName('new-game'));
-  this.newGameControl_ = new goog.ui.Control();
+  this.newGameControl_ = new goog.ui.Control('');
   this.newGameControl_.decorate(newGameEl);
   this.eventHandler_.listen(this.newGameControl_,
       goog.ui.Component.EventType.ACTION, this.handleNewGame_);
@@ -115,7 +116,6 @@ ttt.TicTacToeController.prototype.init_ = function() {
  * @private
  */
 ttt.TicTacToeController.prototype.handleSquarePress_ = function(e) {
-  
   for (var i = 0; i < this.squareControls_.length; i++) {
     if (e.target == this.squareControls_[i]) {
       this.logger.info('Pressed square i = ' + i + 

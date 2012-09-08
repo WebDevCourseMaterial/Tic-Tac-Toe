@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project name="Moving Logo" default="build">
+<project name="TicTacToe" default="build">
 
   <!-- Defining folder locations and other properties. -->
   <property name="closure.dir" value="${basedir}/../../../closure" />
@@ -11,7 +11,7 @@
 
   <!-- Path to this build file from base.js (used by depswriter.py) -->
   <property name="fromBase.dir"
-      value="../../../../gitrepos/MovingLogo/MovingLogo_Solution" />
+      value="../../../../gitrepos/Tic-Tac-Toe/TicTacToe_Solution" />
 	
   <!-- Set to false for optimized production compiling.
 	   Set to true for un-optimized whitespace only compiling for debugging work. -->
@@ -26,58 +26,24 @@
     <mkdir dir="${build.dir}/production/stylesheets"/>
   </target>
 
-  <target name="stylesheets"
-      description="Generate a combined, minified css file.">
-  	<generate-stylesheet
-        outputfile = '${build.dir}/production/stylesheets/moving_logo.css'>
-      <inputfilenames>
-        <arg value="stylesheets/common.css" />
-        <arg value="stylesheets/css3button.css" />
-        <arg value="stylesheets/moving_logo.css" />
-      </inputfilenames>
-      <extraflags>
-        <arg line='--allow-unrecognized-functions' />
-        <arg line='--allow-unrecognized-properties' />
-      </extraflags>
-  	</generate-stylesheet>
-  </target>
-
-  <target name="templates"
-  	  description="Generate JavaScript files from the template soy files">
-    <generate-templates>
-      <inputfilenames>
-      	<!-- Note, these files must be in a folder called templates. -->
-        <arg value="moving_logo.soy" />
-      </inputfilenames>
-    </generate-templates>
-  </target>
-
-  <target name="gen_js_deps"
-  	  description="Generate the deps.js file for testing and uncompiled development">
-    <depswriter
-        pathFromCurrentDir = 'js'
-        pathFromLibraryBase = '${fromBase.dir}/js'
-        outputfile='${build.dir}/deps.js'>
-    </depswriter>
-  </target>
-
   <target name="replicate"
   	  description="Copy non-js files into the build folder as necessary">
     <copy todir="${build.dir}/production">
       <fileset dir=".">
-        <include name="moving_logo.html" />
+        <include name="tictactoe.html" />
         <include name="images/**" />
-      </fileset>
+        <include name="stylesheets/**" />
+        </fileset>
     </copy>
   </target>
 
   <target name="compile" description="generates the compiled javascript">
     <closure-builder
         root='${basedir}/js/'
-        outputfile="${build.dir}/production/js/moving_logo.js"
+        outputfile="${build.dir}/production/js/tictactoe.js"
         compilationlevel="${closure.optimizations}" > <!-- Selects value based on debug property -->
       <namespaces>
-        <arg line='--namespace=movingr.Main' />
+        <arg line='--namespace=ttt.Main' />
       </namespaces>
       <extraflags>
       	<!-- Optional.  This turns what would be warnings into errors for type safety. -->
@@ -86,7 +52,7 @@
     </closure-builder>
   </target>
 	
-  <target name="build" depends="clean, stylesheets, templates, gen_js_deps, replicate, compile" />
+  <target name="build" depends="clean, replicate, compile" />
 
 
 
@@ -98,8 +64,6 @@
   <!-- Locations for the closure components based on the closure folder. -->
   <property name="compiler.jar" value="${closure.dir}/closure-compiler/build/compiler.jar" />
   <property name="closure-library.dir" value="${closure.dir}/closure-library" />
-  <property name="closure-templates.dir" value="${closure.dir}/closure-templates" />
-  <property name="closure-stylesheets.dir" value="${closure.dir}/closure-stylesheets" />
 
   <!-- Output Build Directory -->
   <property name="build.dir" value="${basedir}/build" />
@@ -111,66 +75,9 @@
   <condition property="pretty_print_formatting_arg" value='--compiler_flags="--formatting=PRETTY_PRINT"' else="">
     <equals arg1="${debug}" arg2="true" casesensitive="false"/>
   </condition>
-  <condition property="pretty_print_style_arg" value='--pretty-print' else="">
-    <equals arg1="${debug}" arg2="true" casesensitive="false"/>
-  </condition>
   <condition property="print_input_delimiter_formatting_arg" value='--compiler_flags="--formatting=PRINT_INPUT_DELIMITER"' else="">
     <equals arg1="${debug}" arg2="true" casesensitive="false"/>
   </condition>
-
-  <!-- SoyToJsSrcCompiler command to generate JavaScript code from Soy files -->
-  <macrodef name="generate-templates">
-  <element name="inputfilenames" optional="no"/>
-    <sequential>
-      <java jar="${closure-templates.dir}/build/SoyToJsSrcCompiler.jar"
-          fork="true" failonerror="true" logError="true">
-        <arg line='--inputPrefix templates/' /> <!-- Note required folder name -->
-        <inputfilenames />
-        <arg line='--outputPathFormat ${build.dir}/templates/{INPUT_FILE_NAME_NO_EXT}.js' />
-        <arg line="--shouldGenerateJsdoc" />
-        <arg line="--shouldProvideRequireSoyNamespaces" />
-        <arg line="--cssHandlingScheme GOOG" />
-      </java>
-    </sequential>
-  </macrodef>
-
-  <!-- closure-stylesheets command to combine and minify the CSS -->
-  <macrodef name="generate-stylesheet">
-    <element name="inputfilenames" optional="no"/>
-  	<attribute name="outputfile"/>
-    <attribute name="renamingmap" default="${build.dir}/renaming_map.js"/>
-    <element name="extraflags" optional="yes"/>
-    <sequential>
-      <java jar="${closure-stylesheets.dir}/build/closure-stylesheets.jar"
-          fork="true" failonerror="true" logError="true">
-        <arg line="${pretty_print_style_arg}" />
-        <arg line='--output-file "@{outputfile}"' />
-        <arg line='--output-renaming-map-format CLOSURE_COMPILED' />
-        <arg line='--rename CLOSURE' />
-  		<arg line='--output-renaming-map "@{renamingmap}"' />
-        <extraflags />
-        <inputfilenames />
-      </java>
-    </sequential>
-  </macrodef>
-  		
-  <!-- Used to generate a deps file for testing and uncompiled development -->
-  <macrodef name="depswriter">
-    <attribute name="pathFromCurrentDir" />
-    <attribute name="pathFromLibraryBase" />
-    <attribute name="outputfile" />
-    <element name="extraflags" optional="yes"/>
-    <sequential>
-      <exec executable="python" failonerror="true" logError="true">
-        <arg value="${closure-library.dir}/closure/bin/build/depswriter.py" />
-        <arg line='--root_with_prefix="${closure-templates.dir}/javascript ../../../closure-templates/javascript"' />
-        <arg line='--root_with_prefix="${build.dir}/templates ${fromBase.dir}/build/templates"' />
-        <arg line='--root_with_prefix="@{pathFromCurrentDir} @{pathFromLibraryBase}"' />
-        <arg line='--output_file="@{outputfile}"' />
-        <extraflags />
-      </exec>
-    </sequential>
-  </macrodef>
 
   <!-- Options for the compilationlevels:
     WHITESPACE_ONLY, SIMPLE_OPTIMIZATIONS, ADVANCED_OPTIMIZATIONS" -->
@@ -193,19 +100,16 @@
     <attribute name="compilationlevel" default="ADVANCED_OPTIMIZATIONS" />
     <element name="extraflags" optional="yes"/>
     <sequential>
-      <exec executable="python" failonerror="true" logError="true">
+      <exec executable="c:/Python27/python" failonerror="true" logError="true">
         <arg value="${closure-library.dir}/closure/bin/build/closurebuilder.py" />
         <arg line='--root="${closure-library.dir}"' />
-        <arg line='--root="${closure-templates.dir}/javascript"' />
         <arg line='--root="@{root}"' />
-        <arg line='--root="${build.dir}/templates"' />
         <namespaces />
         <arg line='--output_mode=compiled' />
         <arg line='--compiler_jar=${compiler.jar}' />
         <arg line='--output_file=@{outputfile}' />
         <arg line='--compiler_flags="--compilation_level=@{compilationlevel}"' />
         <arg line='--compiler_flags="--js=${closure-library.dir}/closure/goog/deps.js"' />
-        <arg line='--compiler_flags="--js=${build.dir}/renaming_map.js"' />
         <arg line='--compiler_flags="--warning_level=VERBOSE"' />
         <arg line="${pretty_print_formatting_arg}" />
         <arg line="${print_input_delimiter_formatting_arg}" />

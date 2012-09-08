@@ -8,6 +8,7 @@
 goog.provide('ttt.Game');
 
 goog.require('goog.array');
+goog.require('ttt.GameInterface');
 
 
 
@@ -24,13 +25,13 @@ ttt.Game = function() {
    * @type {Array.<Array.<ttt.Mark>>}
    */
   this.board_ = null;
-  
+
   /**
    * Game state.
-   * @type {ttt.GameState}}
+   * @type {ttt.GameState}
    */
-  this.gameState_ = null;
-  
+  this.gameState_ = ttt.GameState.X_TURN;;
+
   this.reset();
 };
 
@@ -49,6 +50,14 @@ ttt.Game.NUM_ROWS = 3;
  * @const
  */
 ttt.Game.NUM_COLS = 3;
+
+
+/**
+ * Logger for this class.
+ * @type {goog.debug.Logger}
+ */
+ttt.Game.prototype.logger =
+    goog.debug.Logger.getLogger('ttt.Game');
 
 
 /** inheritDoc */
