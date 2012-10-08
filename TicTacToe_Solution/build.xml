@@ -8,6 +8,10 @@
       closure/closure-library   (svn checkout of http://closure-library.googlecode.com/svn/trunk/)
       closure/closure-templates (svn checkout of http://closure-templates.googlecode.com/svn/trunk/)
       closure/closure-stylesheets (git clone of https://code.google.com/p/closure-stylesheets/) -->
+   
+  <!-- Path to your python executable -->
+  <property name="python" value="c:\Python27\python" />
+  <!-- Tip for Mac users.  It's on the path, so use value="python" no folders needed. -->
 
   <!-- Path to this build file from base.js (used by depswriter.py) -->
   <property name="fromBase.dir"
@@ -100,7 +104,7 @@
     <attribute name="compilationlevel" default="ADVANCED_OPTIMIZATIONS" />
     <element name="extraflags" optional="yes"/>
     <sequential>
-      <exec executable="c:/Python27/python" failonerror="true" logError="true">
+      <exec executable="${python}" failonerror="true" logError="true">
         <arg value="${closure-library.dir}/closure/bin/build/closurebuilder.py" />
         <arg line='--root="${closure-library.dir}"' />
         <arg line='--root="@{root}"' />
