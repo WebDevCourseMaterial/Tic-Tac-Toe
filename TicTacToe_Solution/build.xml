@@ -10,7 +10,7 @@
       closure/closure-stylesheets (git clone of https://code.google.com/p/closure-stylesheets/) -->
    
   <!-- Path to your python executable -->
-  <property name="python" value="c:\Python27\python" />
+  <property name="python" value="c:\Program Files\Python2\python" />
   <!-- Tip for Mac users.  It's on the path, so use value="python" no folders needed. -->
 
   <!-- Path to this build file from base.js (used by depswriter.py) -->
