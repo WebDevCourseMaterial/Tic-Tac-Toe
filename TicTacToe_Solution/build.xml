@@ -47,7 +47,7 @@
         outputfile="${build.dir}/production/js/tictactoe.js"
         compilationlevel="${closure.optimizations}" > <!-- Selects value based on debug property -->
       <namespaces>
-        <arg line='--namespace=ttt.Main' />
+        <arg line='--namespace=ttt.main' />
       </namespaces>
       <extraflags>
       	<!-- Optional.  This turns what would be warnings into errors for type safety. -->
