@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/tictactoe.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/common.css">
+    <link href='http://fonts.googleapis.com/css?family=Skranji' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <script type="text/javascript" src="../../../closure/closure-library/closure/goog/base.js"></script>
+    <script type="text/javascript">
+      goog.require('goog.events');
+      goog.require('goog.events.EventTarget');
+      goog.require('goog.debug.Logger');
+    </script>    
+    <script type="text/javascript" src="js/game_interface.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
+    <script type="text/javascript" src="js/tictactoe_controller.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    
+    <!-- TODO: In later projects use a deps file + goog.require statements. -->
+    <!--
+    <script type="text/javascript" src="build/deps.js"></script>
+    <script type="text/javascript">
+      goog.require('tictactoe.main');
+    </script>
+     -->
+  </head>
+  <body>
+    <div class="main">
+      <h1 class="game-state">X's Turn</h1>
+	    <div class="board xturn">
+	      <div class="row">
+	        <img class="square" src="images/empty.png" alt="Board cell">
+	        <img class="square" src="images/empty.png" alt="Board cell">
+	        <img class="square" src="images/empty.png" alt="Board cell">
+	      </div>
+	      <div class="row">
+	        <img class="square" src="images/empty.png" alt="Board cell">
+	        <img class="square" src="images/empty.png" alt="Board cell">
+	        <img class="square" src="images/empty.png" alt="Board cell">
+	      </div>
+	      <div class="row">
+	        <img class="square" src="images/empty.png" alt="Board cell">
+	        <img class="square" src="images/empty.png" alt="Board cell">
+	        <img class="square" src="images/empty.png" alt="Board cell">
+	      </div>
+	    </div>
+      <div class="new-game-wrapper">
+        <button class="new-game">New game</button>
+      </div>
+    </div>
+  </body>
+</html>
